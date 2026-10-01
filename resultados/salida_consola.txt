@@ -1,0 +1,187 @@
+
+======================================================================
+EJERCICIO 1 - PRECIO DEL DÓLAR | FASE 1 - COMPRENSIÓN DEL NEGOCIO
+======================================================================
+Objetivo: estimar el precio del dólar a partir del día, la inflación y la tasa de interés.
+
+======================================================================
+FASE 2 - COMPRENSIÓN DE LOS DATOS
+======================================================================
+Filas y columnas: (500, 4)
+Valores nulos: 0 | Filas duplicadas: 0
+
+Estadística descriptiva:
+              count      mean      std       min       25%       50%       75%       max
+Dia           500.0   250.500  144.482     1.000   125.750   250.500   375.250   500.000
+Inflacion     500.0     0.020    0.005     0.004     0.016     0.020     0.023     0.039
+Tasa_interes  500.0     5.016    0.489     3.652     4.702     5.014     5.326     6.316
+Precio_Dolar  500.0  5211.772  723.895  3940.361  4604.885  5218.791  5825.235  6553.599
+
+Correlación de Pearson con Precio_Dolar:
+Dia             0.9976
+Inflacion       0.0196
+Tasa_interes    0.0743
+
+======================================================================
+FASE 3 - PREPARACIÓN DE LOS DATOS
+======================================================================
+Entrenamiento: 400 filas | Prueba: 100 filas (80/20)
+
+======================================================================
+FASE 4 - MODELADO (Regresión lineal múltiple)
+======================================================================
+Intercepto (b0): 3985.7833
+  b(Dia) = +4.9843 -> por cada unidad que sube Dia, Precio_Dolar aumenta 4.9843 pesos (lo demás constante)
+  b(Inflacion) = -870.7317 -> por cada unidad que sube Inflacion, Precio_Dolar disminuye 870.7317 pesos (lo demás constante)
+  b(Tasa_interes) = -1.3774 -> por cada unidad que sube Tasa_interes, Precio_Dolar disminuye 1.3774 pesos (lo demás constante)
+
+Ecuación: Precio_Dolar = 3985.7833 +4.9843*Dia -870.7317*Inflacion -1.3774*Tasa_interes
+
+Importancia de variables (coeficientes estandarizados, mayor a menor):
+    Variable  Coeficiente  Coef_estandarizado  Impacto_abs
+         Dia       4.9843              0.9976       0.9976
+   Inflacion    -870.7317             -0.0061       0.0061
+Tasa_interes      -1.3774             -0.0009       0.0009
+
+>> Variable con MAYOR impacto: Dia
+
+======================================================================
+FASE 5 - EVALUACIÓN
+======================================================================
+  MSE  : 2376.9709
+  RMSE : 48.7542
+  MAE  : 37.0065
+  R2   : 0.9963
+
+======================================================================
+FASE 6 - DESPLIEGUE (exportar modelo)
+======================================================================
+Modelo guardado en: modelos\dolar.joblib
+Verificación al recargar (predicciones idénticas): True
+
+======================================================================
+EJERCICIO 2 - GLUCOSA EN SANGRE | FASE 1 - COMPRENSIÓN DEL NEGOCIO
+======================================================================
+Objetivo: estimar la glucosa (mg/dL) según edad, IMC y horas semanales de ejercicio.
+
+======================================================================
+FASE 2 - COMPRENSIÓN DE LOS DATOS
+======================================================================
+Filas y columnas: (2000, 4)
+Valores nulos: 0 | Filas duplicadas: 0
+
+Estadística descriptiva:
+                   count     mean     std     min      25%      50%      75%      max
+Edad              2000.0   49.157  17.544  20.000   34.000   50.000   64.000   79.000
+IMC               2000.0   24.963   3.984  10.587   22.345   25.029   27.751   39.430
+Actividad_Fisica  2000.0    4.664   2.912   0.000    2.000    5.000    7.000    9.000
+Nivel_Glucosa     2000.0  139.630  27.343  43.416  119.068  139.967  159.208  227.561
+
+Correlación de Pearson con Nivel_Glucosa:
+Edad                0.7898
+IMC                 0.1383
+Actividad_Fisica   -0.1984
+
+======================================================================
+FASE 3 - PREPARACIÓN DE LOS DATOS
+======================================================================
+Entrenamiento: 1600 filas | Prueba: 400 filas (80/20)
+
+======================================================================
+FASE 4 - MODELADO (Regresión lineal múltiple)
+======================================================================
+Intercepto (b0): 65.8609
+  b(Edad) = +1.2266 -> por cada unidad que sube Edad, Nivel_Glucosa aumenta 1.2266 mg/dL (lo demás constante)
+  b(IMC) = +0.9334 -> por cada unidad que sube IMC, Nivel_Glucosa aumenta 0.9334 mg/dL (lo demás constante)
+  b(Actividad_Fisica) = -2.0853 -> por cada unidad que sube Actividad_Fisica, Nivel_Glucosa disminuye 2.0853 mg/dL (lo demás constante)
+
+Ecuación: Nivel_Glucosa = 65.8609 +1.2266*Edad +0.9334*IMC -2.0853*Actividad_Fisica
+
+Importancia de variables (coeficientes estandarizados, mayor a menor):
+        Variable  Coeficiente  Coef_estandarizado  Impacto_abs
+            Edad       1.2266              0.7874       0.7874
+Actividad_Fisica      -2.0853             -0.2229       0.2229
+             IMC       0.9334              0.1359       0.1359
+
+>> Variable con MAYOR impacto: Edad
+
+======================================================================
+FASE 5 - EVALUACIÓN
+======================================================================
+  MSE  : 233.6930
+  RMSE : 15.2870
+  MAE  : 12.2198
+  R2   : 0.6814
+
+======================================================================
+FASE 6 - DESPLIEGUE (exportar modelo)
+======================================================================
+Modelo guardado en: modelos\glucosa.joblib
+Verificación al recargar (predicciones idénticas): True
+
+======================================================================
+EJERCICIO 3 - CONSUMO DE ENERGÍA | FASE 1 - COMPRENSIÓN DEL NEGOCIO
+======================================================================
+Objetivo: estimar el consumo (kWh) según temperatura, hora del día y día de la semana.
+
+======================================================================
+FASE 2 - COMPRENSIÓN DE LOS DATOS
+======================================================================
+Filas y columnas: (10000, 4)
+Valores nulos: 0 | Filas duplicadas: 0
+
+Estadística descriptiva:
+                   count     mean     std      min      25%      50%      75%      max
+Temperatura      10000.0   24.925   5.004    5.388   21.579   24.901   28.311   44.631
+Hora             10000.0   12.494   6.921    1.000    6.000   12.000   18.000   24.000
+Dia_Semana       10000.0    3.999   2.000    1.000    2.000    4.000    6.000    7.000
+Consumo_Energia  10000.0  400.044  63.825  185.196  356.735  399.270  443.134  631.093
+
+Correlación de Pearson con Consumo_Energia:
+Temperatura    0.7719
+Hora           0.5290
+Dia_Semana    -0.1022
+
+======================================================================
+FASE 3 - PREPARACIÓN DE LOS DATOS
+======================================================================
+Entrenamiento: 8000 filas | Prueba: 2000 filas (80/20)
+
+======================================================================
+FASE 4 - MODELADO (Regresión lineal múltiple)
+======================================================================
+Intercepto (b0): 101.2882
+  b(Temperatura) = +9.9529 -> por cada unidad que sube Temperatura, Consumo_Energia aumenta 9.9529 kWh (lo demás constante)
+  b(Hora) = +5.0198 -> por cada unidad que sube Hora, Consumo_Energia aumenta 5.0198 kWh (lo demás constante)
+  b(Dia_Semana) = -3.0312 -> por cada unidad que sube Dia_Semana, Consumo_Energia disminuye 3.0312 kWh (lo demás constante)
+
+Ecuación: Consumo_Energia = 101.2882 +9.9529*Temperatura +5.0198*Hora -3.0312*Dia_Semana
+
+Importancia de variables (coeficientes estandarizados, mayor a menor):
+   Variable  Coeficiente  Coef_estandarizado  Impacto_abs
+Temperatura       9.9529              0.7803       0.7803
+       Hora       5.0198              0.5464       0.5464
+ Dia_Semana      -3.0312             -0.0954       0.0954
+
+>> Variable con MAYOR impacto: Temperatura
+
+======================================================================
+FASE 5 - EVALUACIÓN
+======================================================================
+  MSE  : 429.5187
+  RMSE : 20.7248
+  MAE  : 16.5101
+  R2   : 0.8968
+
+======================================================================
+FASE 6 - DESPLIEGUE (exportar modelo)
+======================================================================
+Modelo guardado en: modelos\energia.joblib
+Verificación al recargar (predicciones idénticas): True
+
+======================================================================
+RESUMEN DE LOS TRES MODELOS
+======================================================================
+Dólar    MSE= 2376.9709  RMSE= 48.7542  R2=0.9963
+Glucosa  MSE=  233.6930  RMSE= 15.2870  R2=0.6814
+Energía  MSE=  429.5187  RMSE= 20.7248  R2=0.8968
